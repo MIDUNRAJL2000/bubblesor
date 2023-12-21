@@ -4,13 +4,15 @@ function BinarySearch() {
   const [inputArray, setInputArray] = useState("");
   const [searchElement, setSearchElement] = useState("");
   const [resultIndex, setResultIndex] = useState(null);
+  const [highlightedIndex, setHighlightedIndex] = useState(null);
 
   const binarySearch = (arr, target) => {
     let leftIndex = 0;
     let rightIndex = arr.length - 1;
 
-    while (leftIndex < rightIndex) {
+    while (leftIndex <= rightIndex) {
       const mid = Math.floor((leftIndex + rightIndex) / 2);
+      setHighlightedIndex(mid);
 
       if (arr[mid] === target) {
         return mid;
@@ -27,6 +29,7 @@ function BinarySearch() {
     const array = inputArray.split(",").map((num) => parseInt(num.trim(), 10));
     const index = binarySearch(array, parseInt(searchElement, 10));
     setResultIndex(index);
+    setHighlightedIndex(null);
   };
 
   return (
@@ -38,8 +41,16 @@ function BinarySearch() {
           type="text"
           id="inputArray"
           value={inputArray}
-          onChange={(e) => setInputArray(e.target.value)}
+          onChange={(e) => {
+            setInputArray(e.target.value);
+            setHighlightedIndex(null);
+          }}
         />
+        {highlightedIndex != null && (
+          <p className="highlight">
+            Middle element: {inputArray.split(",")[highlightedIndex]}
+          </p>
+        )}
       </div>
       <div>
         <label htmlFor="searchElement">Enter the value to search</label>
@@ -55,9 +66,9 @@ function BinarySearch() {
         <span> {inputArray && <h4>Array : {inputArray} </h4>} </span>
         {resultIndex != null ? (
           resultIndex !== -1 ? (
-            <p className="bold">Element found at index: {resultIndex}</p>
+            <p className="found">Element found at index: {resultIndex}</p>
           ) : (
-            <p>There is no element found in the array</p>
+            <p className="not-found">There is no element found in the array</p>
           )
         ) : null}
       </div>
