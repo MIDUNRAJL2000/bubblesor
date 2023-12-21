@@ -53,10 +53,9 @@ button:hover {
 }
 
 .not-found {
-  color: #ff0000; /* Color for indicating the not found message */
+  color: #ff0000;
 }
 
-/* Animation for search result */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -69,8 +68,6 @@ button:hover {
 .result-message {
   animation: fadeIn 0.5s ease;
 }
-
-/* Optional: Add more styles as needed */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
