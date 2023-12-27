@@ -92,7 +92,7 @@ function BinarySearch() {
   const [resultIndex, setResultIndex] = useState(null);
   const [searchState, setSearchState] = useState(null);
 
-  const [executionTime, setExecutionTime] = useState(null);
+  const [executionTime, setExecutionTime] = useState(0);
 
   const binarySearch = (arr, target) => {
     const startTime = performance.now();
@@ -113,8 +113,6 @@ function BinarySearch() {
       if (arr[mid] === target) {
         setResultIndex(mid);
         setSearchState(searchSteps);
-        const endTime = performance.now();
-        setExecutionTime(endTime - startTime);
         return mid;
       } else if (arr[mid] < target) {
         leftIndex = mid + 1;
@@ -126,8 +124,8 @@ function BinarySearch() {
     setResultIndex(-1);
     setSearchState(searchSteps);
     const endTime = performance.now();
+    console.log(endTime - startTime);
     setExecutionTime(endTime - startTime);
-    return -1;
   };
 
   const onSearch = () => {
@@ -165,9 +163,8 @@ function BinarySearch() {
           resultIndex !== -1 ? (
             <>
               <p className="found">Element found at index: {resultIndex}</p>
-              {executionTime != null && (
-                <p>Execution Time: {executionTime.toFixed(4)} milliseconds</p>
-              )}
+
+              <p>Execution Time: {executionTime.toFixed(4)} milliseconds</p>
             </>
           ) : (
             <p className="not-found">There is no element found in the array</p>
