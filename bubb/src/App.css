@@ -87,3 +87,79 @@ button:hover {
 .right-box {
   background-color: #9999ff; /* Blue */
 }
+
+h2 {
+  color: #333;
+}
+
+.input-container {
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 8px;
+  margin-top: 5px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* ... (rest of the styles remain the same) */
+
+.array-element.current {
+  background-color: #4caf50;
+  color: white;
+}
+
+.array-element.current .arrow {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid white;
+  position: absolute;
+  top: 50%;
+  right: -8px;
+  transform: translateY(-50%);
+}
+
+.bold {
+  font-weight: bold;
+  color: #333;
+}
+
+.binary-search-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.array-visualization {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap; /* Allow flex items to wrap to the next line */
+}
+
+.array-element {
+  min-width: 30px;
+  height: 30px;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2px;
+  position: relative;
+  flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+/* Responsive styling for smaller screens */
+@media screen and (max-width: 400px) {
+  .array-element {
+    min-width: 50px; /* Adjust the minimum width for smaller screens */
+  }
+}
