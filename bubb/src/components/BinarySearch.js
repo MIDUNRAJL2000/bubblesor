@@ -90,16 +90,22 @@ function BinarySearch() {
   const [inputArray, setInputArray] = useState("");
   const [searchElement, setSearchElement] = useState("");
   const [resultIndex, setResultIndex] = useState(null);
+
   const [searchState, setSearchState] = useState(null);
 
   const [executionTime, setExecutionTime] = useState(null);
+
+
 
   const binarySearch = (arr, target) => {
     const startTime = performance.now();
     let leftIndex = 0;
     let rightIndex = arr.length - 1;
 
+
     const searchSteps = [];
+
+
 
     while (leftIndex <= rightIndex) {
       const mid = Math.floor((leftIndex + rightIndex) / 2);
@@ -134,6 +140,7 @@ function BinarySearch() {
     const array = inputArray.split(",").map((num) => parseInt(num.trim(), 10));
     const index = binarySearch(array, parseInt(searchElement, 10));
     setResultIndex(index);
+    
   };
 
   return (
@@ -145,8 +152,16 @@ function BinarySearch() {
           type="text"
           id="inputArray"
           value={inputArray}
-          onChange={(e) => setInputArray(e.target.value)}
+          onChange={(e) => {
+            setInputArray(e.target.value);
+            
+          }}
         />
+        {highlightedIndex != null && (
+          <p className="highlight">
+            Middle element: {inputArray.split(",")[highlightedIndex]}
+          </p>
+        )}
       </div>
       <div>
         <label htmlFor="searchElement">Enter the value to search</label>
@@ -163,12 +178,15 @@ function BinarySearch() {
         {searchState && <BinaryVisualization searchState={searchState} />}
         {resultIndex != null ? (
           resultIndex !== -1 ? (
+
             <>
               <p className="found">Element found at index: {resultIndex}</p>
               {executionTime != null && (
                 <p>Execution Time: {executionTime.toFixed(4)} milliseconds</p>
               )}
             </>
+            
+
           ) : (
             <p className="not-found">There is no element found in the array</p>
           )
