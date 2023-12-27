@@ -36,11 +36,13 @@ button:hover {
 }
 
 .found {
-  color: #008000;
+  color: green;
+  font-weight: bold;
 }
 
 .not-found {
-  color: #ff0000;
+  color: red;
+  font-weight: bold;
 }
 
 @keyframes fadeIn {
@@ -54,4 +56,34 @@ button:hover {
 
 .result-message {
   animation: fadeIn 0.5s ease;
+}
+
+.visualization-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.iteration-box {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.box {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+}
+
+.left-box {
+  background-color: #ff9999; /* Red */
+}
+
+.mid-box {
+  background-color: #99ff99; /* Green */
+}
+
+.right-box {
+  background-color: #9999ff; /* Blue */
 }
