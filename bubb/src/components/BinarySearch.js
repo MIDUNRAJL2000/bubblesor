@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import BinaryVisualization from "./BinaryVisualization";
 
-function ArrayVisualization({ array, target, currentIndex, blink }) {
+function ArrayVisualization({ array, currentIndex }) {
   return (
     <div className="array-visualization">
       {array.map((value, index) => (
         <div
           key={index}
-          className={`array-element 
-           ${index === currentIndex && value === target ? "blink" : ""}`}
+          className={`array-element ${index === currentIndex ? "current" : ""}`}
         >
           {value}
         </div>
       ))}
-      {currentIndex !== null &&
-        currentIndex === array.length - 1 &&
-        target !== array[array.length - 1] && (
-          <div className={`search-element ${blink ? "blink" : "green"}`}></div>
-        )}
     </div>
   );
 }
@@ -27,12 +21,8 @@ function BinarySearch() {
   const [searchElement, setSearchElement] = useState("");
   const [resultIndex, setResultIndex] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
-  const [blink, setBlink] = useState(false);
   const [searchState, setSearchState] = useState([]);
-
-  useEffect(() => {
-    setCurrentIndex(null);
-  }, [inputArray]);
+  const [time, setTime] = useState(null);
 
   const binarySearch = (arr, target) => {
     let leftIndex = 0;
@@ -49,8 +39,6 @@ function BinarySearch() {
       });
 
       if (arr[mid] === target) {
-        setBlink(true);
-        setTimeout(() => setBlink(false), 1000);
         setResultIndex(mid);
         setSearchState(steps);
         return mid;
@@ -68,11 +56,16 @@ function BinarySearch() {
   const onSearch = () => {
     const array = inputArray.split(",").map((num) => parseInt(num.trim(), 10));
     const target = parseInt(searchElement, 10);
+
     if (!isNaN(target)) {
+      const startTime = performance.now();
       const index = binarySearch(array, target);
+      const endTime = performance.now();
       setResultIndex(index);
+      setTime(endTime - startTime);
     } else {
       setResultIndex(null);
+      setTime(null);
     }
   };
 
@@ -106,9 +99,7 @@ function BinarySearch() {
                 array={inputArray
                   .split(",")
                   .map((num) => parseInt(num.trim(), 10))}
-                target={parseInt(searchElement, 10)}
                 currentIndex={currentIndex}
-                blink={blink}
               />
               <BinaryVisualization searchState={searchState} />
             </>
@@ -121,6 +112,9 @@ function BinarySearch() {
             <p className="not-found">There is no element found in the array</p>
           )
         ) : null}
+        {time !== null && (
+          <p>Execution time: {time.toFixed(4)} milli seconds</p>
+        )}
       </div>
     </div>
   );
