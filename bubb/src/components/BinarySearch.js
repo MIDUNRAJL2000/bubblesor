@@ -22,7 +22,6 @@ function BinarySearch() {
   const [resultIndex, setResultIndex] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
   const [searchState, setSearchState] = useState([]);
-  const [time, setTime] = useState(null);
 
   const binarySearch = (arr, target) => {
     let leftIndex = 0;
@@ -58,14 +57,10 @@ function BinarySearch() {
     const target = parseInt(searchElement, 10);
 
     if (!isNaN(target)) {
-      const startTime = performance.now();
       const index = binarySearch(array, target);
-      const endTime = performance.now();
       setResultIndex(index);
-      setTime(endTime - startTime);
     } else {
       setResultIndex(null);
-      setTime(null);
     }
   };
 
@@ -112,9 +107,6 @@ function BinarySearch() {
             <p className="not-found">There is no element found in the array</p>
           )
         ) : null}
-        {time !== null && (
-          <p>Execution time: {time.toFixed(4)} milli seconds</p>
-        )}
       </div>
     </div>
   );
