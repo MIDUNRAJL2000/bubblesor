@@ -1,7 +1,20 @@
-// components/ArrayVisualization.js
 import React from "react";
 import { useSelector } from "react-redux";
-function ArrayVisualization({ array, currentIndex }) {
+
+function ArrayVisualization() {
+  const {
+    inputArray,
+    searchElement,
+    searchState,
+    resultIndex,
+    currentIndex,
+    time,
+  } = useSelector((state) => state.binarySearch);
+
+  const array = inputArray
+    ? inputArray.split(",").map((num) => parseInt(num.trim(), 10))
+    : [];
+
   return (
     <div className="array-visualization">
       {array.map((value, index) => (

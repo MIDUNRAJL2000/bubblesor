@@ -1,4 +1,3 @@
-// slices/binarySearchSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const binarySearchSlice = createSlice({
